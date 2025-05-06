@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Portofolio Elegan - Rasya Andrean</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: #e0e6f8;
+        overflow: hidden;
+      }
+      .container {
+        max-width: 380px;
+        height: 600px;
+        margin: 20px auto;
+        background: #0f1624cc;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 0 10px #2a5298aa;
+        overflow-y: auto;
+        padding: 24px 32px;
+        scrollbar-width: thin;
+        scrollbar-color: #2a5298 #0f1624cc;
+        position: relative;
+      }
+      .container::-webkit-scrollbar {
+        width: 8px;
+      }
+      .container::-webkit-scrollbar-track {
+        background: #0f1624cc;
+        border-radius: 8px;
+      }
+      .container::-webkit-scrollbar-thumb {
+        background: #2a5298;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+      }
+      .container::-webkit-scrollbar-thumb:hover {
+        background: #1e3c72;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.8s ease forwards 0.2s;
+      }
+      .profile-pic {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        border: 3px solid #2a5298;
+        box-shadow: 0 0 20px #2a5298cc;
+        object-fit: cover;
+        margin-right: 24px;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+      .profile-pic:hover,
+      .profile-pic:focus {
+        outline: none;
+        transform: scale(1.05) rotate(5deg);
+        box-shadow: 0 0 30px #66a3ffcc;
+      }
+      header h1 {
+        font-weight: 700;
+        font-size: 2rem;
+        margin: 0 0 6px 0;
+        color: #8db9ff;
+        letter-spacing: 1px;
+      }
+      header p {
+        margin: 2px 0;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #acc8ffcc;
+      }
+
+      section {
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.8s ease forwards;
+      }
+      section:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      section:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      section:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+      section:nth-child(5) {
+        animation-delay: 1s;
+      }
+
+      section h2 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        border-left: 5px solid #66a3ff;
+        padding-left: 12px;
+        color: #abd1ff;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 3px #000000bb;
+      }
+
+      /* About */
+      #about p {
+        font-size: 1rem;
+        color: #c7d1f9dd;
+        line-height: 1.6;
+        text-shadow: 0 0 4px #000000bb;
+      }
+
+      /* Skills */
+      #skills ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      #skills li {
+        background: linear-gradient(135deg, #5a8dee, #7fc7ff);
+        color: #0f1624de;
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        box-shadow: 0 5px 15px rgba(106, 165, 255, 0.6);
+        user-select: none;
+        transition: background 0.3s ease, color 0.3s ease;
+        cursor: default;
+      }
+      #skills li:hover,
+      #skills li:focus {
+        background: #66a3ff;
+        color: white;
+        outline: none;
+        box-shadow: 0 8px 22px #4090ffcc;
+      }
+
+      /* Skill bars */
+      .skill-bar {
+        margin-bottom: 14px;
+      }
+      .skill-bar-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        display: flex;
+        justify-content: space-between;
+        color: #aec7ffdd;
+        letter-spacing: 0.02em;
+      }
+      .skill-bar-container {
+        background: #223149;
+        border-radius: 14px;
+        overflow: hidden;
+        height: 14px;
+        box-shadow: inset 1px 1px 4px #001528aa;
+      }
+      .skill-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #66a3ff, #a9d0ff);
+        width: 0;
+        border-radius: 14px 0 0 14px;
+        box-shadow: 0 0 10px #66a3ffcc;
+        transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Projects */
+      #projects .project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .project {
+        background: #1a2340dd;
+        border-radius: 16px;
+        padding: 16px 22px;
+        box-shadow: 0 6px 18px rgba(54, 101, 192, 0.7);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: default;
+        user-select: none;
+      }
+      .project:hover,
+      .project:focus {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px #66a3ffcc;
+        outline: none;
+      }
+      .project h3 {
+        margin: 0 0 8px 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #9ec9ff;
+        text-shadow: 0 0 5px #000000cc;
+      }
+      .project p {
+        margin: 0 0 10px 0;
+        font-size: 0.9rem;
+        color: #d3deffcc;
+        line-height: 1.4;
+        text-shadow: 0 0 3px #000000bb;
+      }
+      .tech-list {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: #a8c5ffdd;
+        margin-bottom: 12px;
+      }
+      .project a {
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: #88b9ff;
+        border-bottom: 2px solid transparent;
+        font-weight: 600;
+        transition: border-color 0.3s ease, color 0.3s ease;
+      }
+      .project a:hover,
+      .project a:focus {
+        border-color: #a3c8ff;
+        color: #bbd1ff;
+        outline: none;
+      }
+
+      /* Contact */
+      #contact p {
+        font-size: 0.9rem;
+        margin: 8px 0;
+        color: #aabdffdd;
+      }
+      #contact a {
+        color: #a3bfff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      #contact a:hover,
+      #contact a:focus {
+        color: #d1e2ff;
+        text-decoration: underline;
+        outline: none;
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 400px) {
+        .container {
+          max-width: 340px;
+          padding: 20px 24px;
+        }
+        section h2 {
+          font-size: 1.15rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container"
+      role="main"
+      aria-label="Portofolio Elegan Rasya Andrean"
+      tabindex="0"
+    >
+      <header>
+        <img
+          src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+          alt="Foto Profil Rasya Andrean"
+          class="profile-pic"
+          tabindex="0"
+        />
+        <div>
+          <h1>Rasya Andrean</h1>
+          <p>Fullstack Developer & Creative Technologist</p>
+          <p>
+            Bandung, Indonesia | +62 831 1749 3788 |
+            <a href="mailto:rasyaandrean@outlook.co.id" style="color: #a3bfff"
+              >rasyaandrean@outlook.co.id</a
+            >
+          </p>
+        </div>
+      </header>
+
+      <section id="about" aria-labelledby="about-heading" tabindex="0">
+        <h2 id="about-heading">Tentang Saya</h2>
+        <p>
+          Saya adalah pengembang aplikasi berpengalaman selama lebih dari 8
+          tahun dengan keahlian membangun aplikasi web dan mobile yang
+          responsif, scalable, serta user friendly. Memiliki kemampuan kuat
+          dalam berbagai bahasa pemrograman dan teknologi modern seperti
+          JavaScript, TypeScript, React, Vue, Node.js, dan cloud services. Saya
+          suka menggabungkan teknologi dengan desain untuk menciptakan solusi
+          digital inovatif dan impactful.
+        </p>
+      </section>
+
+      <section id="skills" aria-labelledby="skills-heading" tabindex="0">
+        <h2 id="skills-heading">Keahlian</h2>
+        <ul>
+          <li tabindex="0">JavaScript</li>
+          <li tabindex="0">TypeScript</li>
+          <li tabindex="0">React.js</li>
+          <li tabindex="0">Vue.js</li>
+          <li tabindex="0">Node.js</li>
+          <li tabindex="0">Express.js</li>
+          <li tabindex="0">Next.js</li>
+          <li tabindex="0">GraphQL</li>
+          <li tabindex="0">MongoDB</li>
+          <li tabindex="0">PostgreSQL</li>
+          <li tabindex="0">Docker</li>
+          <li tabindex="0">Kubernetes</li>
+          <li tabindex="0">AWS (EC2, Lambda)</li>
+          <li tabindex="0">Firebase</li>
+          <li tabindex="0">Git & GitHub</li>
+          <li tabindex="0">Jest & Testing Library</li>
+          <li tabindex="0">TailwindCSS</li>
+          <li tabindex="0">Figma & Adobe XD</li>
+          <li tabindex="0">Web Accessibility</li>
+          <li tabindex="0">CI/CD Pipelines</li>
+        </ul>
+        <div style="margin-top: 1.4rem">
+          <div class="skill-bar" aria-label="Keahlian JavaScript: 95 persen">
+            <div class="skill-bar-title">
+              <span>JavaScript</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar-fill" style="width: 95%"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" aria-label="Keahlian React.js: 90 persen">
+            <div class="skill-bar-title">
+              <span>React.js</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar-fill" style="width: 90%"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" aria-label="Keahlian Node.js: 88 persen">
+            <div class="skill-bar-title">
+              <span>Node.js</span>
+              <span>88%</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar-fill" style="width: 88%"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" aria-label="Keahlian TypeScript: 85 persen">
+            <div class="skill-bar-title">
+              <span>TypeScript</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar-fill" style="width: 85%"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" aria-label="Keahlian UI/UX Design: 82 persen">
+            <div class="skill-bar-title">
+              <span>UI/UX Design</span>
+              <span>82%</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar-fill" style="width: 82%"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" aria-label="Keahlian AWS: 80 persen">
+            <div class="skill-bar-title">
+              <span>AWS (Cloud Services)</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar-fill" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-heading" tabindex="0">
+        <h2 id="projects-heading">Proyek</h2>
+        <div class="project-list">
+          <div class="project" tabindex="0" aria-describedby="desc-1 tech-1">
+            <h3>InstaShop - Platform E-Commerce Terintegrasi</h3>
+            <p id="desc-1">
+              Platform e-commerce modern lengkap dengan integrasi pembayaran
+              digital, sistem rekomendasi produk menggunakan machine learning,
+              dan dashboard admin realtime.
+            </p>
+            <p class="tech-list" id="tech-1">
+              React.js, Node.js, MongoDB, AWS Lambda, Stripe API, TensorFlow.js
+            </p>
+            <a href="#" aria-label="Lihat detail proyek InstaShop"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-2 tech-2">
+            <h3>Learnify - Platform Kursus Online</h3>
+            <p id="desc-2">
+              Aplikasi pembelajaran online dengan video streaming, kuis
+              interaktif, gamifikasi, dan forum diskusi untuk siswa dan
+              pengajar.
+            </p>
+            <p class="tech-list" id="tech-2">
+              Next.js, GraphQL, PostgreSQL, Firebase Auth, Docker, TailwindCSS
+            </p>
+            <a href="#" aria-label="Lihat detail proyek Learnify"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-3 tech-3">
+            <h3>FitLife - Aplikasi Kesehatan dan Kebugaran</h3>
+            <p id="desc-3">
+              Aplikasi mobile untuk melacak aktivitas olahraga, pola makan,
+              dengan integrasi wearable device dan laporan analitik.
+            </p>
+            <p class="tech-list" id="tech-3">
+              React Native, Redux, Node.js, MongoDB, REST API
+            </p>
+            <a href="#" aria-label="Lihat detail proyek FitLife"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-4 tech-4">
+            <h3>EventPulse - Sistem Manajemen Event Lengkap</h3>
+            <p id="desc-4">
+              Sistem manajemen event yang mendukung pendaftaran peserta,
+              pembayaran online, manajemen jadwal, dan laporan statistik
+              realtime.
+            </p>
+            <p class="tech-list" id="tech-4">
+              Vue.js, Laravel, MySQL, Stripe API, Pusher
+            </p>
+            <a href="#" aria-label="Lihat detail proyek EventPulse"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-5 tech-5">
+            <h3>SmartHome Controller</h3>
+            <p id="desc-5">
+              Dashboard aplikasi untuk mengontrol perangkat smart home,
+              monitoring sensor real-time, dan automasi berbasis aturan custom.
+            </p>
+            <p class="tech-list" id="tech-5">
+              React.js, MQTT, Node.js, Express, MongoDB
+            </p>
+            <a href="#" aria-label="Lihat detail proyek SmartHome Controller"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-6 tech-6">
+            <h3>Globify - Portal Wisata dan Booking</h3>
+            <p id="desc-6">
+              Website portal wisata dengan fitur booking hotel dan paket wisata,
+              review pengguna, dan integrasi peta interaktif.
+            </p>
+            <p class="tech-list" id="tech-6">
+              Nuxt.js, Firebase, Node.js, TailwindCSS, Google Maps API
+            </p>
+            <a href="#" aria-label="Lihat detail proyek Globify"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-7 tech-7">
+            <h3>BlogSphere - Platform Blogging dan CMS</h3>
+            <p id="desc-7">
+              Platform blogging dengan CMS custom, SEO friendly, editor
+              markdown, dan tema yang bisa dikostumisasi pengguna.
+            </p>
+            <p class="tech-list" id="tech-7">
+              Gatsby, GraphQL, Netlify CMS, Contentful
+            </p>
+            <a href="#" aria-label="Lihat detail proyek BlogSphere"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-8 tech-8">
+            <h3>CryptoWatch - Dashboard Cryptocurrency</h3>
+            <p id="desc-8">
+              Dashboard real-time untuk memantau harga, market cap, serta berita
+              terbaru dari berbagai cryptocurrency populer.
+            </p>
+            <p class="tech-list" id="tech-8">
+              React.js, D3.js, CoinGecko API, TailwindCSS
+            </p>
+            <a href="#" aria-label="Lihat detail proyek CryptoWatch"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-9 tech-9">
+            <h3>WorkZone - Aplikasi Kolaborasi Tim</h3>
+            <p id="desc-9">
+              Platform kolaborasi profesional dengan fitur chat, task
+              management, dokumen bersama, dan video conference terintegrasi.
+            </p>
+            <p class="tech-list" id="tech-9">
+              React.js, Node.js, Socket.IO, MongoDB, WebRTC
+            </p>
+            <a href="#" aria-label="Lihat detail proyek WorkZone"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-10 tech-10">
+            <h3>GreenFarm - Sistem Otomasi Pertanian</h3>
+            <p id="desc-10">
+              Sistem monitoring dan kontrol otomatis untuk pertanian hidroponik
+              dengan sensor kelembapan, suhu, dan nutrisi tanaman.
+            </p>
+            <p class="tech-list" id="tech-10">
+              React.js, Raspberry Pi, MQTT, Node.js, Express
+            </p>
+            <a href="#" aria-label="Lihat detail proyek GreenFarm"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-11 tech-11">
+            <h3>FoodExpress - Layanan Pengantaran Makanan</h3>
+            <p id="desc-11">
+              Aplikasi mobile dan web untuk pemesanan makanan cepat dengan
+              pelacakan driver real-time dan sistem rating pengguna.
+            </p>
+            <p class="tech-list" id="tech-11">
+              React Native, Firebase, Node.js, Google Maps API
+            </p>
+            <a href="#" aria-label="Lihat detail proyek FoodExpress"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-12 tech-12">
+            <h3>EduConnect - Portal Pembelajaran dan Komunitas</h3>
+            <p id="desc-12">
+              Portal komunitas edukasi dengan kursus online, forum diskusi, kuis
+              interaktif, dan sistem poin penghargaan.
+            </p>
+            <p class="tech-list" id="tech-12">
+              Angular, Firebase, Node.js, Socket.IO, TailwindCSS
+            </p>
+            <a href="#" aria-label="Lihat detail proyek EduConnect"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-13 tech-13">
+            <h3>TravelMate - Aplikasi Rencana Perjalanan</h3>
+            <p id="desc-13">
+              Aplikasi membantu pengguna merencanakan perjalanan dengan
+              itinerary, reservasi hotel, itinerary berbagi, dan rekomendasi
+              lokasi.
+            </p>
+            <p class="tech-list" id="tech-13">
+              React Native, Node.js, PostgreSQL, AWS S3
+            </p>
+            <a href="#" aria-label="Lihat detail proyek TravelMate"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-14 tech-14">
+            <h3>MediaVox - Platform Berbagi Video</h3>
+            <p id="desc-14">
+              Platform berbagi video dengan fitur upload, streaming, komentar,
+              dan playlist personal.
+            </p>
+            <p class="tech-list" id="tech-14">
+              Vue.js, Node.js, MongoDB, AWS CloudFront
+            </p>
+            <a href="#" aria-label="Lihat detail proyek MediaVox"
+              >Detail &raquo;</a
+            >
+          </div>
+
+          <div class="project" tabindex="0" aria-describedby="desc-15 tech-15">
+            <h3>NewsFlash - Aplikasi Berita Real-time</h3>
+            <p id="desc-15">
+              Aplikasi berita dengan feed realtime, kategori topik, dan
+              integrasi API berita global.
+            </p>
+            <p class="tech-list" id="tech-15">
+              React.js, Redux, Node.js, NewsAPI
+            </p>
+            <a href="#" aria-label="Lihat detail proyek NewsFlash"
+              >Detail &raquo;</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading" tabindex="0">
+        <h2 id="contact-heading">Kontak</h2>
+        <p>
+          Email:
+          <a href="mailto:rasya.andrean@email.com"
+            >rasyaandrean@outlook.co.id</a
+          >
+        </p>
+        <p>Telepon: <a href="tel:+6282145678910">+62 831 1749 3788</a></p>
+        <p>
+          LinkedIn:
+          <a
+            href="https://linkedin.com/in/rasya-andrean-66b911337"
+            target="_blank"
+            rel="noopener noreferrer"
+            >linkedin.com/in/rasyaandrean</a
+          >
+        </p>
+        <p>
+          GitHub:
+          <a
+            href="https://github.com/RasyaAndrean"
+            target="_blank"
+            rel="noopener noreferrer"
+            >github.com/rasyaandrean</a
+          >
+        </p>
+      </section>
+    </div>
+
+    <script>
+      // Animate skill bars filling on page load with smooth delay
+      document.addEventListener("DOMContentLoaded", () => {
+        const fills = document.querySelectorAll(".skill-bar-fill");
+        fills.forEach((fill, i) => {
+          const width = fill.style.width;
+          fill.style.width = "0";
+          setTimeout(() => {
+            fill.style.width = width;
+          }, 200 + i * 300);
+        });
+      });
+    </script>
+  </body>
+</html>
